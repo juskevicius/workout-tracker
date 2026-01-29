@@ -1,0 +1,10 @@
+{
+  "name": "@workout-tracker/ui-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "implicitDependencies": [
+      "@workout-tracker/ui"
+    ]
+  }
+}

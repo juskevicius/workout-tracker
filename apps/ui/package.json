@@ -1,0 +1,29 @@
+{
+  "name": "@workout-tracker/ui",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "projectType": "application",
+    "tags": [
+      "scope:ui"
+    ],
+    "targets": {
+      "serve": {
+        "dependsOn": [
+          "@workout-tracker/bff:serve"
+        ]
+      },
+      "dev": {
+        "dependsOn": [
+          "@workout-tracker/bff:serve"
+        ]
+      },
+      "preview": {
+        "dependsOn": [
+          "build",
+          "@workout-tracker/bff:serve"
+        ]
+      }
+    }
+  }
+}
