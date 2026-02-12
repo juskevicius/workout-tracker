@@ -147,7 +147,7 @@ The app is fully configured as a PWA with offline support, installable on mobile
 
 #### Mobile
 
-- **Android**: Menu (⋮) → Install app
+- **Android**: Menu (⋮) → Add to Home Screen
 - **iPhone**: Share → Add to Home Screen
 
 ## 📚 Resources
