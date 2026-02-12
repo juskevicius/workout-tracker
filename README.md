@@ -2,15 +2,17 @@
 
 An offline-first PWA for comprehensive workout management with cloud synchronization, analytics, and training planning. Built with React, Express, and Nx.
 
-<img src="./docs/screenshots/plan.png" width="150"/>
-<img src="./docs/screenshots/schedule.png" width="150"/>
-<img src="./docs/screenshots/analytics.png" width="150"/>
-<img src="./docs/screenshots/timer.png" width="150"/>
-
+<div style="display: flex; gap: 20px;">
+  <img src="./docs/screenshots/plan.png" width="150"/>
+  <img src="./docs/screenshots/schedule.png" width="150"/>
+  <img src="./docs/screenshots/analytics.png" width="150"/>
+  <img src="./docs/screenshots/timer.png" width="150"/>
+</div>
 
 ## ✨ Features
 
 ### Core Functionality
+
 - **Exercise Management** – Create, edit, delete exercises with customizable sets, reps, and weights
 - **Workout Planning** – Design workout routines and schedule them on a calendar
 - **Live Session Tracking** – Track active workouts with real-time logging
@@ -19,6 +21,7 @@ An offline-first PWA for comprehensive workout management with cloud synchroniza
 - **Cloud Sync** – Backup to and restore from Google Drive using OAuth2
 
 ### User Experience
+
 - **Icon-Based Navigation** – Context-aware action buttons (📊 Analytics, 📋 Plans, ⚙️ Settings)
 - **Responsive Design** – Optimized for mobile (480px), tablet (768px), and desktop
 - **Custom Components** – Specialized checkboxes, dropdowns, and modals
@@ -30,10 +33,10 @@ This is an **Nx monorepo** with a frontend + backend structure:
 
 ### Projects
 
-| Project | Purpose | Tech |
-|---------|---------|------|
-| **apps/ui** | React 19 SPA on Vite | React Router, TypeScript, Testing Library |
-| **apps/bff** | Express API backend | Node.js, esbuild, CORS enabled |
+| Project      | Purpose              | Tech                                      |
+| ------------ | -------------------- | ----------------------------------------- |
+| **apps/ui**  | React 19 SPA on Vite | React Router, TypeScript, Testing Library |
+| **apps/bff** | Express API backend  | Node.js, esbuild, CORS enabled            |
 
 ### Key Architecture Decisions
 
@@ -45,6 +48,7 @@ This is an **Nx monorepo** with a frontend + backend structure:
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Node.js 22+
 - npm
 
@@ -77,10 +81,10 @@ nx build bff
 
 The BFF automatically enables CORS for all origins during development. No additional configuration needed for local testing.
 
-
 ## 🔧 Technology Stack
 
 ### Frontend
+
 - **React 19** – UI framework with hooks
 - **React Router v6** – Client-side routing
 - **Vite** – Fast dev server & build tool
@@ -90,16 +94,17 @@ The BFF automatically enables CORS for all origins during development. No additi
 - **CSS Modules** – Scoped component styles
 
 ### Backend
+
 - **Express.js** – Web framework
 - **Node.js** – JavaScript runtime
 
 ### Build & Testing
+
 - **Nx** – Monorepo orchestration with task caching
 - **Vitest** – Unit & component test runner
 - **Playwright** – E2E browser testing
 - **ESLint** – Code quality
 - **TypeScript Strict Mode** – Strict type checking
-
 
 ## 📊 Development Workflow
 
@@ -126,6 +131,7 @@ nx graph
 The app is fully configured as a PWA with offline support, installable on mobile and desktop.
 
 ### Features
+
 - **Installable** – Add to home screen on Android, iOS, macOS, Windows, and Linux
 - **Offline Capable** – Full functionality with service worker caching
 - **App Shortcuts** – Quick access to Log, Exercises, and Workouts
@@ -134,11 +140,13 @@ The app is fully configured as a PWA with offline support, installable on mobile
 ### Installation
 
 #### Desktop (Chrome/Edge)
+
 1. Visit `http://localhost:4200` or production URL
 2. Click install button in address bar
 3. App launches in standalone mode
 
-#### Mobile  
+#### Mobile
+
 - **Android**: Menu (⋮) → Install app
 - **iPhone**: Share → Add to Home Screen
 
