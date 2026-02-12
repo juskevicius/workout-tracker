@@ -1,0 +1,219 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-xl);
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
+  gap: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.header h2 {
+  font-size: var(--font-size-4xl);
+  font-weight: 600;
+  color: var(--color-text-on-dark);
+  margin: 0;
+}
+
+.errorMessage {
+  background-color: #fee;
+  border-left: 4px solid #f44;
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  color: #d32f2f;
+  margin-bottom: var(--spacing-lg);
+  font-size: var(--font-size-sm);
+}
+
+.warningMessage {
+  background-color: #ffe;
+  border-left: 4px solid #ff9800;
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  color: #f57c00;
+  margin-bottom: var(--spacing-lg);
+  font-size: var(--font-size-sm);
+}
+
+.infoMessage {
+  background-color: #e3f2fd;
+  border-left: 4px solid #2196f3;
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  color: #1565c0;
+  margin-bottom: var(--spacing-lg);
+  font-size: var(--font-size-sm);
+}
+
+.section {
+  background-color: var(--color-bg-primary);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-2xl);
+  margin-bottom: var(--spacing-2xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.sectionTitle {
+  margin: 0 0 var(--spacing-md) 0;
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.sectionDescription {
+  margin: 0 0 var(--spacing-lg) 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.button {
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: none;
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-on-dark);
+  border: 2px solid var(--color-border);
+}
+
+.button:hover:not(:disabled) {
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.buttonPrimary {
+  background-color: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+.buttonPrimary:hover:not(:disabled) {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+}
+
+.buttonSecondary {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-on-dark);
+  border-color: var(--color-primary);
+}
+
+.buttonSecondary:hover:not(:disabled) {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.googleAuthContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-2xl);
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--border-radius-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.googleAuthNote {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-on-dark);
+  text-align: center;
+}
+
+.googleAuthSection {
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-lg);
+}
+
+.authStatus {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md) var(--spacing-xl);
+  background-color: #f1f5f4;
+  border-radius: var(--border-radius-md);
+  color: #2e7d32;
+  font-weight: 600;
+}
+
+.statusIndicator {
+  font-size: var(--font-size-lg);
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .container {
+    padding: var(--spacing-lg);
+  }
+
+  .header h2 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .section {
+    padding: var(--spacing-lg);
+  }
+
+  .buttonGroup {
+    flex-direction: column;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .container {
+    padding: var(--spacing-md);
+  }
+
+  .header h2 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .section {
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .sectionTitle {
+    font-size: var(--font-size-lg);
+  }
+
+  .sectionDescription {
+    font-size: var(--font-size-xs);
+  }
+
+  .button {
+    padding: var(--spacing-md);
+    font-size: var(--font-size-sm);
+  }
+
+  .authStatus {
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+  }
+}

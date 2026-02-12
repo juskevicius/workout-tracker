@@ -1,0 +1,138 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2xl);
+}
+
+.exerciseInfo {
+  background-color: var(--color-bg-primary);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-2xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.exerciseName {
+  margin: 0 0 var(--spacing-sm) 0;
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.stats {
+  margin: 0;
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+}
+
+.chartSection {
+  background-color: var(--color-bg-primary);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-2xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.chartTitle {
+  margin: 0 0 var(--spacing-lg) 0;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.summarySection {
+  background-color: var(--color-bg-primary);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-2xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.summaryTitle {
+  margin: 0 0 var(--spacing-lg) 0;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.summaryCard {
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.summaryLabel {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.summaryValue {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .exerciseInfo {
+    padding: var(--spacing-lg);
+  }
+
+  .chartSection {
+    padding: var(--spacing-lg);
+  }
+
+  .summarySection {
+    padding: var(--spacing-lg);
+  }
+
+  .exerciseName {
+    font-size: var(--font-size-xl);
+  }
+
+  .summaryGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .exerciseInfo {
+    padding: var(--spacing-md);
+  }
+
+  .chartSection {
+    padding: var(--spacing-md);
+  }
+
+  .summarySection {
+    padding: var(--spacing-md);
+  }
+
+  .exerciseName {
+    font-size: var(--font-size-lg);
+  }
+
+  .chartTitle {
+    font-size: var(--font-size-base);
+  }
+
+  .summaryTitle {
+    font-size: var(--font-size-base);
+  }
+
+  .summaryGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .summaryValue {
+    font-size: var(--font-size-xl);
+  }
+}

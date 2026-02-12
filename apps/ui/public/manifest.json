@@ -1,0 +1,41 @@
+{
+  "name": "Gratis Training",
+  "short_name": "Gratis Training",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "lang": "en",
+  "scope": "/",
+  "id": "/",
+  "icons": [
+    { "src": "icons/pwa-64x64.png", "sizes": "64x64", "type": "image/png" },
+    { "src": "icons/pwa-192x192.png", "sizes": "192x192", "type": "image/png" },
+    {
+      "src": "icons/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/maskable-icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshots/plan.png",
+      "type": "image/png",
+      "sizes": "372x666",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "screenshots/logWide.png",
+      "type": "image/png",
+      "sizes": "660x375",
+      "form_factor": "wide"
+    }
+  ]
+}

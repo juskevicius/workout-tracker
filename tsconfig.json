@@ -7,13 +7,7 @@
       "path": "./apps/bff"
     },
     {
-      "path": "./apps/ui-e2e"
-    },
-    {
       "path": "./apps/ui"
-    },
-    {
-      "path": "./libs/shared/models"
     }
   ]
 }

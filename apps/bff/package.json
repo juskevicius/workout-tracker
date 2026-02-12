@@ -18,7 +18,7 @@
             "cjs"
           ],
           "bundle": true,
-          "main": "apps/bff/src/main.ts",
+          "main": "apps/bff/src/web-server.ts",
           "tsConfig": "apps/bff/tsconfig.app.json",
           "assets": [
             "apps/bff/src/assets"
@@ -33,6 +33,9 @@
         "configurations": {
           "development": {},
           "production": {
+            "main": "apps/bff/src/lambda.js",
+            "thirdParty": true,
+            "outputFileName": "index.js",
             "generateLockfile": true,
             "esbuildOptions": {
               "sourcemap": false,

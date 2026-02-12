@@ -1,0 +1,251 @@
+.calendar {
+  background-color: var(--color-bg-primary);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-2xl);
+}
+
+.navButton {
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  font-size: var(--font-size-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-base);
+  flex-shrink: 0;
+}
+
+.navButton:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.monthYear {
+  margin: 0;
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  text-align: center;
+  flex: 1;
+}
+
+.weekDays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin-bottom: var(--spacing-lg);
+}
+
+.weekDay {
+  text-align: center;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-base);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  background-color: var(--color-bg-tertiary);
+}
+
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.emptyDay {
+  aspect-ratio: 1;
+}
+
+.day {
+  aspect-ratio: 1;
+  border: 2px solid var(--color-border);
+  background-color: var(--color-bg-tertiary);
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all var(--transition-base);
+  font-family: inherit;
+  padding: 0;
+  font-size: var(--font-size-lg);
+  color: var(--color-text-primary);
+}
+
+.day:hover:not(.selected) {
+  border-color: var(--color-primary);
+  background-color: var(--color-bg-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.dayNumber {
+  font-weight: 700;
+  font-size: var(--font-size-lg);
+}
+
+.workoutDotsContainer {
+  display: flex;
+  gap: 4px;
+  position: absolute;
+  bottom: 4px;
+}
+
+.workoutDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.day.today {
+  border-color: var(--color-primary);
+  border-width: 3px;
+  background-color: var(--color-primary-light);
+}
+
+.day.today .dayNumber {
+  color: var(--color-primary-dark);
+}
+
+.day.selected {
+  background-color: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary-dark);
+  border-width: 2px;
+  box-shadow: var(--shadow-md);
+}
+
+.day.selected .dayNumber {
+  color: white;
+}
+
+.day.selected .workoutDotsContainer {
+  /* Keep dots visible on selected day */
+}
+
+.day.selected .workoutDot {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.day.hasWorkout .dayNumber {
+  font-weight: 700;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+  .calendar {
+    padding: var(--spacing-lg);
+  }
+
+  .header {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .monthYear {
+    font-size: var(--font-size-xl);
+  }
+
+  .navButton {
+    width: 36px;
+    height: 36px;
+    font-size: var(--font-size-base);
+  }
+
+  .weekDays {
+    gap: 5px;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .weekDay {
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-sm);
+  }
+
+  .days {
+    gap: 5px;
+  }
+
+  .day {
+    font-size: var(--font-size-base);
+  }
+
+  .dayNumber {
+    font-size: var(--font-size-base);
+  }
+
+  .workoutDotsContainer {
+    gap: 3px;
+  }
+
+  .workoutDot {
+    width: 6px;
+    height: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .calendar {
+    padding: var(--spacing-md);
+  }
+
+  .monthYear {
+    font-size: var(--font-size-base);
+  }
+
+  .navButton {
+    width: 28px;
+    height: 28px;
+    font-size: var(--font-size-sm);
+  }
+
+  .weekDays {
+    gap: 4px;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .weekDay {
+    font-size: var(--font-size-xs);
+    padding: var(--spacing-xs);
+    background-color: transparent;
+  }
+
+  .days {
+    gap: 4px;
+  }
+
+  .day {
+    font-size: var(--font-size-xs);
+    background-color: var(--color-bg-tertiary);
+  }
+
+  .dayNumber {
+    font-size: var(--font-size-sm);
+  }
+
+  .workoutDotsContainer {
+    gap: 2px;
+  }
+
+  .workoutDot {
+    width: 6px;
+    height: 6px;
+  }
+}
+

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="100 80 315 315" fill="none">
+   <g transform="translate(0, 20)">
+      <g fill="#55a8a3" fill-opacity="0.4">
+         <rect x="140" y="150" width="30" height="50" rx="4" />
+         <rect x="185" y="120" width="30" height="80" rx="4" />
+         <rect x="230" y="100" width="30" height="100" rx="4" />
+         <rect x="275" y="130" width="30" height="70" rx="4" />
+         <rect x="320" y="110" width="30" height="90" rx="4" />
+         <rect x="365" y="140" width="30" height="60" rx="4" />
+      </g>
+      <path d="M125 180L180 140L245 190L310 120L385 160" stroke="#55a8a3" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+      <circle cx="125" cy="180" r="10" fill="#55a8a3" />
+      <circle cx="180" cy="140" r="10" fill="#55a8a3" />
+      <circle cx="245" cy="190" r="10" fill="#55a8a3" />
+      <circle cx="310" cy="120" r="10" fill="#55a8a3" />
+      <circle cx="385" cy="160" r="10" fill="#55a8a3" />
+   </g>
+   <g transform="translate(0, -20)" fill="#55a8a3">
+      <rect x="150" y="310" width="212" height="24" rx="12" />
+      <rect x="115" y="270" width="32" height="104" rx="10" />
+      <rect x="155" y="285" width="24" height="74" rx="6" />
+      <rect x="333" y="285" width="24" height="74" rx="6" />
+      <rect x="365" y="270" width="32" height="104" rx="10" />
+   </g>
+</svg>

@@ -2,6 +2,8 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
+import path from 'path';
 
 export default defineConfig(() => ({
   root: __dirname,
@@ -14,13 +16,24 @@ export default defineConfig(() => ({
     port: 4200,
     host: 'localhost',
   },
-  plugins: [react(), nxViteTsPaths()],
+  plugins: [
+    react(),
+    nxViteTsPaths(),
+    viteStaticCopy({
+      targets: [
+        {
+          src: path.resolve(__dirname, './src/index.mjs'), // AWS lambda handler
+          dest: path.resolve(__dirname, './dist'),
+        },
+      ],
+    }),
+  ],
   // Uncomment this if you are using workers.
   // worker: {
   //  plugins: [ nxViteTsPaths() ],
   // },
   build: {
-    outDir: './dist',
+    outDir: './dist/web',
     emptyOutDir: true,
     reportCompressedSize: true,
     commonjsOptions: {
@@ -28,7 +41,7 @@ export default defineConfig(() => ({
     },
   },
   test: {
-    name: '@workout-tracker/shop',
+    name: '@workout-tracker/ui',
     watch: false,
     globals: true,
     environment: 'jsdom',

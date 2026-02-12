@@ -1,0 +1,201 @@
+.panel {
+  background-color: var(--color-bg-primary);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  overflow: visible;
+}
+
+.selectedDate {
+  padding: var(--spacing-md);
+  background-color: var(--color-primary-light);
+  border-left: 4px solid var(--color-primary);
+  border-radius: var(--border-radius-md);
+}
+
+.selectedDate h3 {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  overflow: visible;
+}
+
+.section h4 {
+  margin: 0;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.noWorkouts,
+.empty {
+  margin: 0;
+  padding: var(--spacing-md);
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--border-radius-md);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  text-align: center;
+}
+
+.select {
+  padding: var(--spacing-md);
+  border: 2px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-base);
+  font-family: inherit;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  cursor: pointer;
+  transition: border-color var(--transition-base);
+  position: relative;
+  z-index: 10;
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-focus);
+}
+
+.scheduleButton {
+  padding: var(--spacing-md);
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.scheduleButton:hover:not(:disabled) {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.scheduleButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.scheduledList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.scheduledItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md);
+  background-color: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  transition: all var(--transition-base);
+}
+
+.scheduledItem:hover {
+  box-shadow: var(--shadow-sm);
+}
+
+.itemContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  flex: 1;
+}
+
+.itemName {
+  font-weight: 600;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-base);
+}
+
+.itemStatus {
+  font-size: var(--font-size-sm);
+}
+
+.completed {
+  color: var(--color-success);
+  font-weight: 600;
+}
+
+.pending {
+  color: var(--color-text-muted);
+}
+
+.removeButton {
+  background-color: var(--color-danger);
+  color: white;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-lg);
+  transition: all var(--transition-base);
+  flex-shrink: 0;
+}
+
+.removeButton:hover {
+  background-color: var(--color-danger-dark);
+  transform: scale(1.1);
+}
+
+/* Mobile-specific styles */
+@media (max-width: 480px) {
+  .panel {
+    padding: var(--spacing-md);
+    gap: var(--spacing-md);
+  }
+
+  .selectedDate {
+    padding: var(--spacing-md);
+  }
+
+  .selectedDate h3 {
+    font-size: var(--font-size-base);
+  }
+
+  .section h4 {
+    font-size: var(--font-size-sm);
+  }
+
+  .select,
+  .scheduleButton {
+    font-size: var(--font-size-sm);
+    padding: 10px 12px;
+  }
+
+  .scheduledItem {
+    padding: var(--spacing-sm);
+  }
+
+  .itemName {
+    font-size: var(--font-size-sm);
+  }
+
+  .removeButton {
+    width: 28px;
+    height: 28px;
+    font-size: var(--font-size-base);
+  }
+}

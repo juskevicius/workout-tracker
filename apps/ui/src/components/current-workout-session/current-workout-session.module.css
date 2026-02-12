@@ -1,0 +1,455 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2xl);
+}
+
+.header {
+  background-color: var(--color-bg-primary);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-2xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.workoutInfo {
+  margin: 0;
+}
+
+.workoutName {
+  margin: 0 0 var(--spacing-sm) 0;
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.description {
+  margin: 0;
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.exercisesList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.empty {
+  text-align: center;
+  padding: var(--spacing-2xl);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-base);
+}
+
+.exerciseCard {
+  background-color: var(--color-bg-tertiary);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: box-shadow var(--transition-base);
+}
+
+.exerciseCard:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.exerciseHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-2xl);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--transition-base);
+  text-align: left;
+}
+
+.exerciseHeader:hover {
+  background-color: var(--color-bg-tertiary);
+}
+
+.exerciseHeader.expanded {
+  background-color: var(--color-bg-tertiary);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.exerciseHeader.completed {
+  opacity: 0.7;
+}
+
+.completionCheckbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.exerciseTitle {
+  flex: 1;
+  margin: 0;
+}
+
+.exerciseName {
+  margin: 0 0 var(--spacing-xs) 0;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.exerciseMeta {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.chevron {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  margin-left: var(--spacing-md);
+  transition: transform var(--transition-base);
+}
+
+.timerBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  border: none;
+  cursor: pointer;
+  font-size: 1.25rem;
+  color: white;
+  transition: all var(--transition-base);
+  flex-shrink: 0;
+  margin: 0 var(--spacing-sm);
+}
+
+.timerBtn:hover {
+  background-color: var(--color-primary-dark);
+  transform: scale(1.1);
+}
+
+.timerBtn:active {
+  transform: scale(0.95);
+}
+
+.exerciseDetails {
+  padding: var(--spacing-2xl);
+  background-color: var(--color-bg-tertiary);
+  border-top: 1px solid var(--color-border);
+}
+
+.section {
+  margin-bottom: var(--spacing-lg);
+}
+
+.label {
+  display: block;
+  margin-bottom: var(--spacing-sm);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+}
+
+.setLabel {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.setCheckbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.checkboxLabel {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  text-align: center;
+}
+
+.setsContainer {
+  margin-bottom: var(--spacing-lg);
+}
+
+.setRow {
+  display: grid;
+  grid-template-columns: 50px 1fr auto;
+  gap: var(--spacing-md);
+  align-items: flex-end;
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-md);
+  transition: opacity var(--transition-base);
+}
+
+.setNumber {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  min-width: 50px;
+}
+
+.setRow.setCompleted {
+  opacity: 0.6;
+}
+
+.setRow.setCompleted .setNumber,
+.setRow.setCompleted .setLabel {
+  text-decoration: line-through;
+}
+
+.setInputs {
+  display: grid;
+  grid-auto-flow: column;
+  gap: var(--spacing-md);
+  justify-content: start;
+}
+
+.inputGroup {
+  flex: 1;
+  min-width: 100px;
+}
+
+.inputGroup label {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+}
+
+.input {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 2px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-base);
+  background-color: white;
+  color: var(--color-text-primary);
+  font-family: inherit;
+  transition: border-color var(--transition-base);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-focus);
+}
+
+.input.readOnly {
+  background-color: var(--color-bg-tertiary);
+  cursor: not-allowed;
+  color: var(--color-text-secondary);
+}
+
+.effortSection {
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background-color: var(--color-bg-primary);
+  border-radius: var(--border-radius-md);
+}
+
+.effortSlider {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-sm);
+}
+
+.slider {
+  flex: 1;
+  cursor: pointer;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(
+    to right,
+    #ef4444,
+    #f97316,
+    #eab308,
+    #22c55e,
+    #eab308
+  );
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.effortValue {
+  min-width: 30px;
+  text-align: center;
+  font-weight: 600;
+  color: var(--color-primary);
+  font-size: var(--font-size-base);
+}
+
+.notesSection {
+  margin-bottom: 0;
+}
+
+.textarea {
+  width: 100%;
+  padding: var(--spacing-md);
+  border: 2px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-base);
+  background-color: white;
+  color: var(--color-text-primary);
+  font-family: inherit;
+  resize: vertical;
+  min-height: 80px;
+  transition: border-color var(--transition-base);
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-focus);
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .workoutName {
+    font-size: var(--font-size-2xl);
+  }
+
+  .exerciseHeader {
+    padding: var(--spacing-lg);
+  }
+
+  .exerciseDetails {
+    padding: var(--spacing-lg);
+  }
+
+  .setRow {
+    grid-template-columns: 45px 1fr auto;
+  }
+
+  .inputGroup {
+    min-width: 70px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .header {
+    padding: var(--spacing-lg);
+  }
+
+  .workoutName {
+    font-size: var(--font-size-lg);
+  }
+
+  .setRow {
+    grid-template-columns: auto 1fr auto;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+    padding-bottom: var(--spacing-sm);
+  }
+
+  .setNumber {
+    font-size: var(--font-size-xs);
+    min-width: 40px;
+  }
+
+  .setInputs {
+    gap: var(--spacing-sm);
+  }
+
+  .inputGroup {
+    min-width: 50px;
+  }
+
+  .inputGroup label {
+    font-size: var(--font-size-xs);
+    margin-bottom: 3px;
+  }
+
+  .input {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--font-size-sm);
+  }
+
+  .setCheckbox {
+    width: auto;
+  }
+
+  .checkboxLabel {
+    font-size: var(--font-size-xs);
+    margin-bottom: 3px;
+  }
+
+  .exerciseHeader {
+    padding: var(--spacing-md);
+    flex-wrap: wrap;
+  }
+
+  .exerciseName {
+    font-size: var(--font-size-base);
+  }
+
+  .exerciseDetails {
+    padding: var(--spacing-md);
+  }
+
+  .setRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-sm);
+  }
+
+  .setLabel {
+    min-width: auto;
+  }
+
+  .setInputs {
+    flex-direction: column;
+  }
+
+  .inputGroup {
+    min-width: auto;
+  }
+
+  .effortSlider {
+    flex-wrap: wrap;
+  }
+
+  .slider {
+    width: 100%;
+  }
+
+  .textarea {
+    padding: var(--spacing-sm);
+  }
+}

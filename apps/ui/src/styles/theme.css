@@ -1,0 +1,78 @@
+/* Theme colors for the Workout Tracker app */
+
+:root {
+  /* Primary Colors */
+  --color-primary: #55a8a3;
+  --color-primary-dark: #32706c;
+  --color-primary-light: #dcfce7;
+
+  /* Status Colors */
+  --color-success: #55a8a3;
+  --color-success-dark: #32706c;
+  --color-success-shadow: rgba(34, 197, 94, 0.3);
+  --color-danger: #ef4444;
+  --color-danger-dark: #dc2626;
+
+  /* Error/Alert Colors */
+  --color-error-bg: #fee2e2;
+  --color-error-border: #fecaca;
+  --color-error-text: #7f1d1d;
+
+  /* Neutral Colors - Dark mode with light cards */
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #333;
+  --color-text-muted: #666;
+  --color-bg-primary: #f5f5f5;
+  --color-bg-secondary: #1a1a1a;
+  --color-bg-tertiary: #f0f0f0;
+  --color-bg-hover: #efefef;
+  --color-bg-disabled: #e5e5e5;
+  --color-text-on-dark: #ffffff;
+  --color-text-on-dark-secondary: #f5f5f5;
+
+  /* Border Colors */
+  --color-border: #d4d4d4;
+  --color-border-light: #cccccc;
+
+  /* Gradient - Green */
+  /* --color-gradient-primary: linear-gradient(135deg, #24a06b 0%, #30d33b 100%); */
+  --color-gradient-primary: linear-gradient(135deg, #55a8a3 0%, #72bfba 100%);
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.15);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.25);
+  --shadow-focus: 0 0 0 3px rgba(34, 197, 94, 0.2);
+
+  /* Typography */
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-md: 15px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 20px;
+  --font-size-3xl: 24px;
+  --font-size-4xl: 28px;
+  --font-size-5xl: 32px;
+
+  /* Border Radius */
+  --border-radius-sm: 4px;
+  --border-radius-md: 6px;
+  --border-radius-lg: 8px;
+
+  /* Transitions */
+  --transition-fast: 0.1s;
+  --transition-base: 0.2s;
+  --transition-slow: 0.3s;
+
+  /* Spacing */
+  --spacing-xs: 6px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 15px;
+  --spacing-xl: 20px;
+  --spacing-2xl: 25px;
+  --spacing-3xl: 30px;
+}
