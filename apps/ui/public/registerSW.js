@@ -7,5 +7,12 @@ if ('serviceWorker' in navigator) {
       return;
     }
     navigator.serviceWorker.register('/sw.js', { scope: '/' });
+
+    navigator.serviceWorker.oncontrollerchange = () => {
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+      if (isIOS) {
+        window.location.reload();
+      }
+    };
   });
 }

@@ -9,25 +9,32 @@ self.addEventListener('install', (event) => {
       await cache.addAll(appShellFiles);
     })()
   );
+  self.skipWaiting();
 });
 
-const NON_ASSET_PATHS = [
-  'welcome',
-  'log',
-  'timer',
-  'plan',
-  'schedule',
-  'exercises',
-  'extra-features',
-];
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    (async () => {
+      const names = await caches.keys();
+      await Promise.all(
+        names.map((name) => {
+          if (name !== cacheName) {
+            return caches.delete(name);
+          }
+          return undefined;
+        })
+      );
+      await clients.claim();
+    })()
+  );
+});
 
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     (async () => {
       const resource = await caches.match(event.request);
 
-      const path = new URL(event.request.url).pathname.split('/')[1]; // Get the first segment of the path
-      if (NON_ASSET_PATHS.includes(path)) {
+      if (event.request.mode === 'navigate') {
         const resource = await caches.match('/index.html');
         return resource || fetch('/index.html');
       }

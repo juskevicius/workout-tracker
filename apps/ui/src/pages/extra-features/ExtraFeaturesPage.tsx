@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSyncManager } from '../../hooks/useSyncManager';
 import { getGoogleAuthUrl } from '../../services/google-drive';
 import styles from './extra-features.module.css';
@@ -8,17 +8,6 @@ export function ExtraFeaturesPage() {
     useSyncManager();
 
   const [isAuthenticating, setIsAuthenticating] = useState(false);
-
-  useEffect(() => {
-    // Clear caches when opening Extra Features to ensure we get the latest version of the app
-    async function clearCaches() {
-      const cacheNames = await caches.keys();
-      await Promise.all(
-        cacheNames.map((cacheName) => caches.delete(cacheName))
-      );
-    }
-    clearCaches();
-  }, []);
 
   const handleGoogleLogin = async () => {
     try {
