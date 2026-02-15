@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { Workout, Exercise } from '../../types/types';
+import { Dropdown } from '../dropdown/dropdown';
 import styles from './workout-form.module.css';
 
 interface WorkoutFormProps {
@@ -24,6 +25,9 @@ export function WorkoutForm({
   const [selectedExercises, setSelectedExercises] = useState<number[]>(
     initialData?.exercises || []
   );
+  const [selectedExerciseToAdd, setSelectedExerciseToAdd] = useState<
+    number | null
+  >(null);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -61,12 +65,44 @@ export function WorkoutForm({
     }
   };
 
-  const toggleExercise = (exerciseId: number) => {
-    setSelectedExercises((prev) =>
-      prev.includes(exerciseId)
-        ? prev.filter((id) => id !== exerciseId)
-        : [...prev, exerciseId]
-    );
+  const addExercise = (exerciseId: number) => {
+    if (!selectedExercises.includes(exerciseId)) {
+      setSelectedExercises((prev) => [...prev, exerciseId]);
+    }
+  };
+
+  const removeExercise = (exerciseId: number) => {
+    setSelectedExercises((prev) => prev.filter((id) => id !== exerciseId));
+  };
+
+  const handleDragStart = (
+    e: React.DragEvent<HTMLDivElement>,
+    index: number
+  ) => {
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', index.toString());
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+  };
+
+  const handleDrop = (
+    e: React.DragEvent<HTMLDivElement>,
+    dropIndex: number
+  ) => {
+    e.preventDefault();
+    const dragIndex = parseInt(e.dataTransfer.getData('text/plain'), 10);
+
+    if (dragIndex === dropIndex) return;
+
+    setSelectedExercises((prev) => {
+      const newExercises = [...prev];
+      const [draggedItem] = newExercises.splice(dragIndex, 1);
+      newExercises.splice(dropIndex, 0, draggedItem);
+      return newExercises;
+    });
   };
 
   return (
@@ -102,10 +138,10 @@ export function WorkoutForm({
         />
       </div>
 
-      {/* Exercise Selection */}
+      {/* Exercise Selection - Dropdown */}
       <div className={styles.formGroup}>
         <div className={styles.labelWithButton}>
-          <label>Select Exercises</label>
+          <label htmlFor="exercise-select">Select Exercises</label>
           <button
             type="button"
             className={styles.createExerciseBtn}
@@ -121,44 +157,74 @@ export function WorkoutForm({
             page.
           </div>
         ) : (
-          <div className={styles.exerciseGrid}>
-            {allExercises.map((exercise) => (
-              <div key={exercise.id} className={styles.exerciseCheckbox}>
-                <input
-                  type="checkbox"
-                  id={`exercise-${exercise.id}`}
-                  checked={selectedExercises.includes(exercise.id)}
-                  onChange={() => toggleExercise(exercise.id)}
-                  disabled={submitting}
-                />
-                <label
-                  htmlFor={`exercise-${exercise.id}`}
-                  className={styles.checkboxLabel}
-                >
-                  <span className={styles.exerciseName}>{exercise.name}</span>
-                  {exercise.sets && exercise.reps && (
-                    <span className={styles.exerciseMeta}>
-                      {exercise.sets}x{exercise.reps}
-                      {exercise.weight && ` @ ${exercise.weight}kg`}
-                    </span>
-                  )}
-                </label>
-              </div>
-            ))}
-          </div>
+          <Dropdown
+            value={selectedExerciseToAdd}
+            onChange={(exerciseId) => {
+              addExercise(exerciseId);
+              setSelectedExerciseToAdd(null);
+            }}
+            options={allExercises
+              .filter((e) => !selectedExercises.includes(e.id))
+              .map((exercise) => ({
+                value: exercise.id,
+                label: `${exercise.name}${
+                  exercise.sets && exercise.reps
+                    ? ` (${exercise.sets}x${exercise.reps}${
+                        exercise.weight ? ` @ ${exercise.weight}kg` : ''
+                      })`
+                    : ''
+                }`,
+              }))}
+            placeholder="-- Add an exercise --"
+          />
         )}
       </div>
 
-      {/* Selected Exercises Summary */}
+      {/* Selected Exercises List */}
       {selectedExercises.length > 0 && (
         <div className={styles.selectedSummary}>
-          <strong>Selected: {selectedExercises.length} exercise(s)</strong>
+          <strong className={styles.summaryTitle}>
+            Selected Exercises ({selectedExercises.length})
+          </strong>
           <div className={styles.selectedList}>
-            {selectedExercises.map((id) => {
+            {selectedExercises.map((id, index) => {
               const exercise = allExercises.find((e) => e.id === id);
               return exercise ? (
-                <div key={id} className={styles.selectedItem}>
-                  {exercise.name}
+                <div
+                  key={id}
+                  className={styles.selectedListItem}
+                  draggable
+                  onDragStart={(e) => handleDragStart(e, index)}
+                  onDragOver={handleDragOver}
+                  onDrop={(e) => handleDrop(e, index)}
+                >
+                  <div className={styles.exerciseInfo}>
+                    <span className={styles.dragHandle} title="Drag to reorder">
+                      ≡
+                    </span>
+                    <div className={styles.exerciseDetails}>
+                      <span className={styles.exerciseTitle}>
+                        {exercise.name}
+                      </span>
+                      {exercise.sets && exercise.reps && (
+                        <span className={styles.exerciseMetaInfo}>
+                          {'( '}
+                          {exercise.sets}x{exercise.reps}
+                          {exercise.weight && ` @ ${exercise.weight}kg`}
+                          {' )'}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    className={styles.removeButton}
+                    onClick={() => removeExercise(id)}
+                    title="Remove exercise"
+                    disabled={submitting}
+                  >
+                    ✕
+                  </button>
                 </div>
               ) : null;
             })}
