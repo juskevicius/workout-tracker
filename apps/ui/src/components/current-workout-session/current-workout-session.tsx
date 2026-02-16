@@ -95,11 +95,20 @@ export function CurrentWorkoutSession({
     if (exerciseLog) {
       await onUpdateExerciseLog(exerciseLog.id, {
         isCompleted: !exerciseLog.isCompleted,
+        setsCompleted: Array(exerciseLog.setsCompleted.length).fill(
+          !exerciseLog.isCompleted
+        ),
       });
     } else {
       const defaultExerciseLog = buildDefaultExerciseLog(exerciseId);
       await onAddExerciseLog(
-        { ...defaultExerciseLog, isCompleted: true },
+        {
+          ...defaultExerciseLog,
+          isCompleted: true,
+          setsCompleted: Array(defaultExerciseLog.setsCompleted.length).fill(
+            true
+          ),
+        },
         workoutLog.id
       );
     }
