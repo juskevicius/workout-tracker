@@ -9,7 +9,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: var(--spacing-3xl);
   gap: var(--spacing-lg);
   flex-wrap: wrap;
 }

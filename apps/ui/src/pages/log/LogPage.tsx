@@ -14,7 +14,7 @@ export function LogPage() {
   const { exercises } = useExercises();
   const { workoutLogs } = useWorkoutLogs();
   const { exerciseLogs, addExerciseLog, updateExerciseLog } = useExerciseLogs();
-  const [todayWorkout, setTodayWorkout] = useState<any | null>(null);
+  const [todaysWorkouts, setTodayWorkouts] = useState<any | null>([]);
   const navigate = useNavigate();
 
   const getTodayDateString = () => {
@@ -27,19 +27,22 @@ export function LogPage() {
 
   useEffect(() => {
     const today = getTodayDateString();
-    const todayLog = workoutLogs.find((log) => log.date === today);
+    const todayLogs = workoutLogs.filter((log) => log.date === today);
 
-    if (todayLog) {
-      const workout = workouts.find((w) => w.id === todayLog.workoutId);
-      setTodayWorkout({
-        log: todayLog,
-        workout: workout,
-        exercises: workout
-          ? exercises.filter((e) => workout.exercises.includes(e.id))
-          : [],
+    if (todayLogs.length) {
+      const todaysWorkouts = todayLogs.map((todaysLog) => {
+        const workout = workouts.find((w) => w.id === todaysLog.workoutId);
+        return {
+          log: todaysLog,
+          workout,
+          exercises: workout
+            ? exercises.filter((e) => workout.exercises.includes(e.id))
+            : [],
+        };
       });
+      setTodayWorkouts(todaysWorkouts);
     } else {
-      setTodayWorkout(null);
+      setTodayWorkouts([]);
     }
   }, [workoutLogs, workouts, exercises]);
 
@@ -49,15 +52,18 @@ export function LogPage() {
         <h2>Today's Workouts</h2>
       </div>
 
-      {todayWorkout ? (
-        <CurrentWorkoutSession
-          workoutLog={todayWorkout.log}
-          workout={todayWorkout.workout}
-          exercises={todayWorkout.exercises}
-          exerciseLogs={exerciseLogs}
-          onAddExerciseLog={addExerciseLog}
-          onUpdateExerciseLog={updateExerciseLog}
-        />
+      {todaysWorkouts.length ? (
+        todaysWorkouts.map((w) => (
+          <CurrentWorkoutSession
+            key={w.workout.id}
+            workoutLog={w.log}
+            workout={w.workout}
+            exercises={w.exercises}
+            exerciseLogs={exerciseLogs}
+            onAddExerciseLog={addExerciseLog}
+            onUpdateExerciseLog={updateExerciseLog}
+          />
+        ))
       ) : (
         <div className={styles.empty}>
           <p className={styles.emptyTitle}>No workout planned today</p>
