@@ -27,7 +27,12 @@
   font-size: var(--font-size-4xl);
   font-weight: 600;
   color: var(--color-text-on-dark);
-  margin: 0;
+  margin: var(--spacing-xs) 0;
+}
+
+.header h2 span {
+  vertical-align: bottom;
+  padding: 0 var(--spacing-sm);
 }
 
 .addButton {
@@ -39,7 +44,8 @@
   font-size: var(--font-size-base);
   font-weight: 600;
   cursor: pointer;
-  transition: background-color var(--transition-base), transform var(--transition-fast);
+  transition: background-color var(--transition-base),
+    transform var(--transition-fast);
   white-space: nowrap;
 }
 
@@ -136,7 +142,7 @@
   }
 
   .header h2 {
-    font-size: var(--font-size-2xl);
+    font-size: var(--font-size-3xl);
   }
 
   .addButton {
@@ -162,7 +168,7 @@
   }
 
   .header h2 {
-    font-size: var(--font-size-2xl);
+    font-size: var(--font-size-3xl);
   }
 
   .addButton {

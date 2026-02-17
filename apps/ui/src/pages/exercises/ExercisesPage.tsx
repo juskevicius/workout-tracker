@@ -8,12 +8,22 @@ import type { Exercise } from '../../types/types';
 import styles from './exercise-page.module.css';
 
 export function ExercisesPage() {
-  const { exercises, loading, error, addExercise, updateExercise, deleteExercise } = useExercises();
+  const {
+    exercises,
+    loading,
+    error,
+    addExercise,
+    updateExercise,
+    deleteExercise,
+  } = useExercises();
   const navigate = useNavigate();
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
-  const [deleteConfirmation, setDeleteConfirmation] = useState<{ isOpen: boolean; id: number | null }>({
+  const [deleteConfirmation, setDeleteConfirmation] = useState<{
+    isOpen: boolean;
+    id: number | null;
+  }>({
     isOpen: false,
     id: null,
   });
@@ -57,8 +67,13 @@ export function ExercisesPage() {
 
       {/* Header Section */}
       <div className={styles.header}>
-        <h2>Exercises</h2>
-        <button className={styles.addButton} onClick={() => setShowForm(!showForm)}>
+        <h2>
+          <span className="material-symbols-outlined">exercise</span>Exercises
+        </h2>
+        <button
+          className={styles.addButton}
+          onClick={() => setShowForm(!showForm)}
+        >
           {showForm ? 'Cancel' : '+ Add Exercise'}
         </button>
       </div>

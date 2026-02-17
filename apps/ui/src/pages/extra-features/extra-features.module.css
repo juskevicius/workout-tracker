@@ -19,6 +19,7 @@
   font-weight: 600;
   color: var(--color-text-on-dark);
   margin: 0;
+  margin-left: var(--spacing-xs);
 }
 
 .errorMessage {
@@ -172,7 +173,7 @@
   }
 
   .header h2 {
-    font-size: var(--font-size-2xl);
+    font-size: var(--font-size-3xl);
   }
 
   .section {
@@ -191,7 +192,7 @@
   }
 
   .header h2 {
-    font-size: var(--font-size-2xl);
+    font-size: var(--font-size-3xl);
   }
 
   .section {

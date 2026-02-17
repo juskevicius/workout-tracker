@@ -49,7 +49,10 @@ export function LogPage() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h2>Today's Workouts</h2>
+        <h2>
+          <span className="material-symbols-outlined">checklist</span>Today's
+          Workouts
+        </h2>
       </div>
 
       {todaysWorkouts.length ? (

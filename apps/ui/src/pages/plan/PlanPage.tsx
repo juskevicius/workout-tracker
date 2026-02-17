@@ -80,7 +80,10 @@ export function PlanPage() {
     <div className={styles.container}>
       {/* Header Section */}
       <div className={styles.header}>
-        <h2>Workout Plan</h2>
+        <h2>
+          <span className="material-symbols-outlined">calendar_month</span>{' '}
+          Workout Plan
+        </h2>
         <button
           className={styles.addButton}
           onClick={() => {
