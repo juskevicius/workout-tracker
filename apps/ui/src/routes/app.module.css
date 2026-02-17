@@ -65,7 +65,6 @@ body {
   font-weight: 500;
   transition: background-color var(--transition-base);
   white-space: nowrap;
-  font-variant-emoji: text;
 }
 
 .navLink:hover {
@@ -91,7 +90,6 @@ body {
   background: none;
   border: none;
   color: white;
-  font-size: 1.5rem;
   cursor: pointer;
   transition: all var(--transition-base);
 }

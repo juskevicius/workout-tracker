@@ -57,13 +57,17 @@ export function ExerciseList({
                   {exercise.description && (
                     <p className={styles.description}>{exercise.description}</p>
                   )}
-                </div>
-                <div className={styles.metrics}>
-                  <span className={styles.badge}>{exercise.sets}x</span>
-                  <span className={styles.badge}>{exercise.reps}r</span>
-                  {exercise.weight ? (
-                    <span className={styles.badge}>{exercise.weight}kg</span>
-                  ) : null}
+                  {expandedId !== exercise.id && (
+                    <div className={styles.metrics}>
+                      <span className={styles.badge}>{exercise.sets}x</span>
+                      <span className={styles.badge}>{exercise.reps}r</span>
+                      {exercise.weight ? (
+                        <span className={styles.badge}>
+                          {exercise.weight}kg
+                        </span>
+                      ) : null}
+                    </div>
+                  )}
                 </div>
                 <div
                   className={styles.analyticsBtn}
@@ -80,19 +84,17 @@ export function ExerciseList({
                     }
                   }}
                 >
-                  📊
+                  <span className="material-symbols-outlined">bar_chart</span>
                 </div>
                 <button
-                  className={`${styles.expandButton} ${
-                    expandedId === exercise.id ? styles.expanded : ''
-                  }`}
+                  className={styles.expandButton}
                   onClick={(e) => {
                     e.stopPropagation();
                     toggleExpanded(exercise.id);
                   }}
                   aria-label="Toggle details"
                 >
-                  ▼
+                  {expandedId === exercise.id ? '▼' : '▶'}
                 </button>
               </div>
 

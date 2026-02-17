@@ -67,7 +67,7 @@ export function WorkoutList({
                 }
               }}
             >
-              📋
+              <span className="material-symbols-outlined">calendar_clock</span>
             </div>
             <span className={styles.expandIcon}>
               {expandedId === workout.id ? '▼' : '▶'}

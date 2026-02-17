@@ -116,5 +116,5 @@
       }
     }
   },
-  "agent": false
+  "daemon": false
 }

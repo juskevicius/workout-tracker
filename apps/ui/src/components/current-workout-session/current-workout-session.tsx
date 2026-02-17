@@ -260,7 +260,7 @@ export function CurrentWorkoutSession({
                         }
                       }}
                     >
-                      ⏱
+                      <span className="material-symbols-outlined">timer</span>
                     </div>
                   )}
                   <span className={styles.chevron}>

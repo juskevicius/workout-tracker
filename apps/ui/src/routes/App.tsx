@@ -59,7 +59,7 @@ export function App() {
             title="Extra Features"
             aria-label="Open extra features"
           >
-            ⚙
+            <span className="material-symbols-outlined">settings</span>
           </button>
         </div>
       </header>
