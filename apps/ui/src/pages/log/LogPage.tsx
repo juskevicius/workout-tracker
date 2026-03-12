@@ -36,7 +36,9 @@ export function LogPage() {
           log: todaysLog,
           workout,
           exercises: workout
-            ? exercises.filter((e) => workout.exercises.includes(e.id))
+            ? workout.exercises
+                .map((id) => exercises.find((e) => e.id === id))
+                .filter(Boolean)
             : [],
         };
       });

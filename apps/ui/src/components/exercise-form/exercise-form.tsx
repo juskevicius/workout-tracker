@@ -46,6 +46,54 @@ export function ExerciseForm({
       .filter((name) => name);
   };
 
+  const generatePreview = (): string => {
+    const repNamesList = parseRepNames(repNames);
+    const lines: string[] = [];
+
+    for (let setNum = 1; setNum <= sets; setNum++) {
+      lines.push(`Set ${setNum}:`);
+
+      for (let repNum = 0; repNum < reps; repNum++) {
+        const repName =
+          repNamesList.length > 0
+            ? repNamesList[repNum % repNamesList.length]
+            : `Rep ${repNum + 1}`;
+
+        if (repDurationSeconds > 0) {
+          lines.push(
+            ` ${repNum + 1}) ${repName} x ${repDurationSeconds} second${
+              repDurationSeconds !== 1 ? 's' : ''
+            }`
+          );
+        } else {
+          lines.push(`${repNum + 1})  ${repName}`);
+        }
+
+        if (repRestPeriodSeconds > 0 && repNum < reps - 1) {
+          lines.push(
+            `    rest x ${repRestPeriodSeconds} second${
+              repRestPeriodSeconds !== 1 ? 's' : ''
+            }`
+          );
+        }
+      }
+
+      if (setRestPeriodSeconds > 0 && setNum < sets) {
+        lines.push(
+          `Rest between sets x ${setRestPeriodSeconds} second${
+            setRestPeriodSeconds !== 1 ? 's' : ''
+          }`
+        );
+      }
+
+      if (setNum < sets) {
+        lines.push('');
+      }
+    }
+
+    return lines.join('\n');
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
@@ -252,6 +300,12 @@ export function ExerciseForm({
                   disabled={submitting}
                 />
               </div>
+            </div>
+
+            {/* Preview Section */}
+            <div className={styles.previewSection}>
+              <h3 className={styles.previewTitle}>Sequence Preview</h3>
+              <pre className={styles.previewText}>{generatePreview()}</pre>
             </div>
           </div>
         )}
