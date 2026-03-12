@@ -58,6 +58,26 @@ export function IntervalTimer({ exercise, onBack }: IntervalTimerProps) {
     }
   };
 
+  // Make sure the screen stays awake during the workout
+  useEffect(() => {
+    let wakeLock: WakeLockSentinel | null = null;
+
+    const requestWakeLock = async () => {
+      try {
+        wakeLock = await navigator.wakeLock.request();
+      } catch (err) {
+        console.error(`Error requesting wake lock: ${err}`);
+      }
+    };
+
+    requestWakeLock();
+
+    return () => {
+      wakeLock?.release();
+      wakeLock = null;
+    };
+  }, []);
+
   // Timer effect
   useEffect(() => {
     if (!state.isRunning) return;
