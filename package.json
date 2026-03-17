@@ -5,10 +5,9 @@
   "scripts": {
     "ui:build": "nx build ui --mode development",
     "ui:build:prod": "nx build ui --mode production",
-    "ui:serve": "nx serve ui",
     "bff:build": "nx build bff --configuration=development",
     "bff:build:prod": "nx build bff --configuration=production",
-    "bff:serve": "nx serve bff",
+    "all:serve": "nx run-many --target=serve --all",
     "deploy": "cd ci && terraform apply -var-file=production.tfvars"
   },
   "private": true,

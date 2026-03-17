@@ -6,24 +6,6 @@
     "projectType": "application",
     "tags": [
       "scope:ui"
-    ],
-    "targets": {
-      "serve": {
-        "dependsOn": [
-          "@workout-tracker/bff:serve"
-        ]
-      },
-      "dev": {
-        "dependsOn": [
-          "@workout-tracker/bff:serve"
-        ]
-      },
-      "preview": {
-        "dependsOn": [
-          "build",
-          "@workout-tracker/bff:serve"
-        ]
-      }
-    }
+    ]
   }
 }
