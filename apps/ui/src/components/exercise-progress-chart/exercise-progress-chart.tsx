@@ -18,7 +18,10 @@ interface ExerciseProgressChartProps {
   logs: ExerciseLog[];
 }
 
-export function ExerciseProgressChart({ exercise, logs }: ExerciseProgressChartProps) {
+export function ExerciseProgressChart({
+  exercise,
+  logs,
+}: ExerciseProgressChartProps) {
   // Prepare data for weight progress
   const weightData = logs
     .filter((log) => log.weightPerRep && log.weightPerRep.length > 0)
@@ -39,8 +42,7 @@ export function ExerciseProgressChart({ exercise, logs }: ExerciseProgressChartP
 
   // Prepare data for reps progress
   const repsData = logs.map((log) => {
-    const totalReps =
-      log.repsCompletedPerSet?.reduce((a, b) => a + b, 0) || 0;
+    const totalReps = log.repsCompletedPerSet?.reduce((a, b) => a + b, 0) || 0;
     const avgReps = log.repsCompletedPerSet
       ? Math.round((totalReps / log.repsCompletedPerSet.length) * 10) / 10
       : 0;
@@ -81,8 +83,8 @@ export function ExerciseProgressChart({ exercise, logs }: ExerciseProgressChartP
       <div className={styles.exerciseInfo}>
         <h3 className={styles.exerciseName}>{exercise.name}</h3>
         <p className={styles.stats}>
-          {exercise.sets} set{exercise.sets !== 1 ? 's' : ''} ×{' '}
-          {exercise.reps} rep{exercise.reps !== 1 ? 's' : ''}
+          {exercise.sets} set{exercise.sets !== 1 ? 's' : ''} × {exercise.reps}{' '}
+          rep{exercise.reps !== 1 ? 's' : ''}
           {exercise.weight && ` @ ${exercise.weight}kg`}
         </p>
       </div>
@@ -93,11 +95,7 @@ export function ExerciseProgressChart({ exercise, logs }: ExerciseProgressChartP
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={weightData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
-              <XAxis
-                dataKey="date"
-                tick={{ fontSize: 12 }}
-                stroke="#666"
-              />
+              <XAxis dataKey="date" tick={{ fontSize: 12 }} stroke="#666" />
               <YAxis stroke="#666" domain={weightYAxisDomain} />
               <Tooltip
                 contentStyle={{
@@ -126,11 +124,7 @@ export function ExerciseProgressChart({ exercise, logs }: ExerciseProgressChartP
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={repsData}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
-            <XAxis
-              dataKey="date"
-              tick={{ fontSize: 12 }}
-              stroke="#666"
-            />
+            <XAxis dataKey="date" tick={{ fontSize: 12 }} stroke="#666" />
             <YAxis stroke="#666" />
             <Tooltip
               contentStyle={{
@@ -145,17 +139,48 @@ export function ExerciseProgressChart({ exercise, logs }: ExerciseProgressChartP
         </ResponsiveContainer>
       </div>
 
+      {logs.some((log) => log.notes) && (
+        <div className={styles.notesSection}>
+          <h4 className={styles.notesTitle}>Workout Notes</h4>
+          <div className={styles.notesList}>
+            {logs
+              .filter((log) => log.notes && log.notes.trim())
+              .sort(
+                (a, b) =>
+                  new Date(b.date).getTime() - new Date(a.date).getTime()
+              )
+              .map((log) => (
+                <div
+                  key={`${log.exerciseId}-${log.date}`}
+                  className={styles.noteItem}
+                >
+                  <span className={styles.noteDate}>
+                    {new Date(log.date).toLocaleDateString('en-US', {
+                      weekday: 'short',
+                      month: 'short',
+                      day: 'numeric',
+                      year: 'numeric',
+                    })}
+                  </span>
+                  <p className={styles.noteText}>{log.notes}</p>
+                </div>
+              ))}
+          </div>
+          {!logs.some((log) => log.notes && log.notes.trim()) && (
+            <div className={styles.emptyNotesMessage}>
+              No notes recorded yet
+            </div>
+          )}
+        </div>
+      )}
+
       {repsData.length > 0 && (
         <div className={styles.chartSection}>
           <h4 className={styles.chartTitle}>Effort Level</h4>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={repsData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
-              <XAxis
-                dataKey="date"
-                tick={{ fontSize: 12 }}
-                stroke="#666"
-              />
+              <XAxis dataKey="date" tick={{ fontSize: 12 }} stroke="#666" />
               <YAxis domain={[0, 10]} stroke="#666" />
               <Tooltip
                 contentStyle={{
@@ -219,8 +244,7 @@ export function ExerciseProgressChart({ exercise, logs }: ExerciseProgressChartP
             <span className={styles.summaryLabel}>Avg Effort</span>
             <span className={styles.summaryValue}>
               {(
-                repsData.reduce((sum, d) => sum + d.effort, 0) /
-                repsData.length
+                repsData.reduce((sum, d) => sum + d.effort, 0) / repsData.length
               ).toFixed(1)}
               /10
             </span>

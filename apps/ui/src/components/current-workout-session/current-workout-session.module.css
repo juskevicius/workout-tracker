@@ -120,6 +120,7 @@
   transition: transform var(--transition-base);
 }
 
+.analyticsBtn,
 .timerBtn {
   display: flex;
   align-items: center;
@@ -137,11 +138,13 @@
   margin: 0 var(--spacing-sm);
 }
 
+.analyticsBtn:hover,
 .timerBtn:hover {
   background-color: var(--color-primary-dark);
   transform: scale(1.1);
 }
 
+.analyticsBtn:active,
 .timerBtn:active {
   transform: scale(0.95);
 }

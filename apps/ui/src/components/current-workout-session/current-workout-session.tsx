@@ -263,6 +263,23 @@ export function CurrentWorkoutSession({
                       <span className="material-symbols-outlined">timer</span>
                     </div>
                   )}
+                  <div
+                    className={styles.analyticsBtn}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate(`/exercises/${exercise.id}/analytics`);
+                    }}
+                    role="button"
+                    tabIndex={0}
+                    title="View analytics"
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        navigate(`/exercises/${exercise.id}/analytics`);
+                      }
+                    }}
+                  >
+                    <span className="material-symbols-outlined">bar_chart</span>
+                  </div>
                   <span className={styles.chevron}>
                     {isExpanded ? '▼' : '▶'}
                   </span>
