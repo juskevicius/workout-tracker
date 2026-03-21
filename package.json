@@ -8,6 +8,7 @@
     "bff:build": "nx build bff --configuration=development",
     "bff:build:prod": "nx build bff --configuration=production",
     "all:serve": "nx run-many --target=serve --all",
+    "all:build:prod": "npm run ui:build:prod && npm run bff:build:prod",
     "deploy": "cd ci && terraform apply -var-file=production.tfvars"
   },
   "private": true,

@@ -39,24 +39,25 @@ export function IntervalTimer({ exercise, onBack }: IntervalTimerProps) {
       .padStart(2, '0')}`;
   };
 
-  const getPhaseInfo = (): { label: string; duration: number } => {
+  const getPhaseDisplay = (): { current: string; next: string } => {
+    const current =
+      state.phase === 'work' ? getRepName(state.currentRep - 1) : 'REST';
+
+    let next: string;
     if (state.phase === 'work') {
-      return {
-        label: 'WORK',
-        duration: exercise.repDurationSeconds!,
-      };
+      next =
+        state.currentRep < exercise.reps || state.currentSet < exercise.sets
+          ? 'REST'
+          : 'Done';
     } else if (state.phase === 'rest-rep') {
-      return {
-        label: 'REST',
-        duration: exercise.repRestPeriodSeconds || 0,
-      };
+      next = getRepName(state.currentRep);
     } else {
-      return {
-        label: 'REST (Set)',
-        duration: exercise.setRestPeriodSeconds || 0,
-      };
+      next = getRepName(0);
     }
+
+    return { current, next };
   };
+
 
   // Make sure the screen stays awake during the workout
   useEffect(() => {
@@ -200,8 +201,6 @@ export function IntervalTimer({ exercise, onBack }: IntervalTimerProps) {
       state.currentRep > exercise.reps &&
       state.phase === 'work');
 
-  const phaseInfo = getPhaseInfo();
-
   return (
     <div className={styles.container}>
       <button className={styles.backBtn} onClick={onBack}>
@@ -228,9 +227,11 @@ export function IntervalTimer({ exercise, onBack }: IntervalTimerProps) {
               {formatTime(state.timeRemaining)}
             </div>
             <div className={styles.repName}>
-              {getRepName(state.currentRep - 1)}
+              {getPhaseDisplay().current}
             </div>
-            <div className={styles.currentPhase}>{phaseInfo.label}</div>
+            <div className={styles.currentPhase}>
+              Next: {getPhaseDisplay().next}
+            </div>
             <div className={styles.progress}>
               Set {state.currentSet}/{exercise.sets} • Rep {state.currentRep}/
               {exercise.reps}
@@ -276,9 +277,8 @@ export function IntervalTimer({ exercise, onBack }: IntervalTimerProps) {
             </button>
 
             <button
-              className={`${
-                state.isRunning ? styles.pauseBtn : styles.playBtn
-              } ${styles.controlBtn}`}
+              className={`${state.isRunning ? styles.pauseBtn : styles.playBtn
+                } ${styles.controlBtn}`}
               onClick={toggleTimer}
             >
               {state.isRunning ? '⏸' : '▶'}

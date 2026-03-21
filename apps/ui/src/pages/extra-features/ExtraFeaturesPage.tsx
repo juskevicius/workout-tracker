@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useSyncManager } from '../../hooks/useSyncManager';
+import { useBangleSync } from '../../hooks/useBangleSync';
 import { getGoogleAuthUrl } from '../../services/google-drive';
 import styles from './extra-features.module.css';
 
@@ -8,6 +9,8 @@ export function ExtraFeaturesPage() {
     useSyncManager();
 
   const [isAuthenticating, setIsAuthenticating] = useState(false);
+  const { isEnabled: isBangleSyncEnabled, toggle: toggleBangleSync } =
+    useBangleSync();
 
   const handleGoogleLogin = async () => {
     try {
@@ -102,6 +105,30 @@ export function ExtraFeaturesPage() {
             </div>
           </div>
         )}
+      </div>
+
+      {/* Bangle.js Sync Section */}
+      <div className={styles.section}>
+        <h3 className={styles.sectionTitle}>Bangle.js Watch Sync</h3>
+        <p className={styles.sectionDescription}>
+          Enable this to show a sync button on your workout sessions, allowing
+          you to send workout data to a Bangle.js smartwatch via
+          Gadgetbridge notifications.
+        </p>
+
+        <div className={styles.toggleRow}>
+          <span className={styles.toggleLabel}>
+            {isBangleSyncEnabled ? 'Enabled' : 'Disabled'}
+          </span>
+          <button
+            className={`${styles.toggle} ${isBangleSyncEnabled ? styles.toggleActive : ''}`}
+            onClick={toggleBangleSync}
+            role="switch"
+            aria-checked={isBangleSyncEnabled}
+          >
+            <span className={styles.toggleThumb} />
+          </button>
+        </div>
       </div>
     </div>
   );

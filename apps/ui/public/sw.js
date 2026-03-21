@@ -1,4 +1,4 @@
-const cacheName = 'v10';
+const cacheName = 'v12';
 
 const appShellFiles = ['/index.html', '/manifest.json'];
 

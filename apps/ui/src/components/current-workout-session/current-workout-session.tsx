@@ -6,6 +6,8 @@ import type {
   WorkoutLog,
   ExerciseLog,
 } from '../../types/types';
+import { syncWorkoutToBangle } from '../../utils/bangle-sync';
+import { useBangleSync } from '../../hooks/useBangleSync';
 import { CustomCheckbox } from '../custom-checkbox/custom-checkbox';
 import styles from './current-workout-session.module.css';
 
@@ -34,6 +36,7 @@ export function CurrentWorkoutSession({
 }: CurrentWorkoutSessionProps) {
   const navigate = useNavigate();
   const [expandedExercise, setExpandedExercise] = useState<number | null>(null);
+  const { isEnabled: isBangleSyncEnabled } = useBangleSync();
 
   // Get or create exercise logs for today's workout
   const getExerciseLog = (exerciseId: number): ExerciseLog | null => {
@@ -207,6 +210,15 @@ export function CurrentWorkoutSession({
             <p className={styles.description}>{workout.description}</p>
           )}
         </div>
+        {isBangleSyncEnabled && (
+          <button
+            className={styles.syncBtn}
+            onClick={() => syncWorkoutToBangle(workout, exercises)}
+            title="Sync workout to Bangle.js"
+          >
+            <span className="material-symbols-outlined">watch</span>
+          </button>
+        )}
       </div>
 
       <div className={styles.exercisesList}>
