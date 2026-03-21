@@ -38,6 +38,7 @@ var timeLeft = 0;         // seconds remaining in current phase
 var running = false;      // is the countdown ticking?
 var timerInterval = null; // setInterval id
 var completed = false;    // entire workout finished?
+var appState = 'idle';    // 'idle' | 'menu' | 'timer'
 
 // ── helpers ──────────────────────────────────────────────────────────
 function ex() { return workout.exercises[exIdx]; }
@@ -122,7 +123,7 @@ function draw() {
 
 // ── timer tick ───────────────────────────────────────────────────────
 function tick() {
-  if (!running) return;
+  if (appState !== 'timer' || !running) return;
   timeLeft--;
 
   if (timeLeft <= 0) {
@@ -211,8 +212,8 @@ function nextExercise() {
 // ── input handling ───────────────────────────────────────────────────
 function onTap() {
   if (completed) {
-    // restart from idle screen
-    startIdleScreen();
+    // restart from menu
+    showExerciseMenu();
     return;
   }
   if (!hasTimer()) {
@@ -238,22 +239,68 @@ function onSwipe(dir) {
   }
 }
 
+// ── menu switching ───────────────────────────────────────────────────
+function showExerciseMenu() {
+  appState = 'menu';
+  running = false;
+  
+  var menu = {
+    "": { 
+      title: "Exercises",
+      back: function() {
+        cleanup();
+        Bangle.showLauncher();
+      }
+    }
+  };
+  
+  workout.exercises.forEach(function(ex, i) {
+    // Truncate name if it's too long
+    var name = ex.name.length > 15 ? ex.name.substring(0, 14) + '…' : ex.name;
+    menu[name] = function() {
+      exIdx = i;
+      setNum = 1;
+      repNum = 1;
+      phase = 'work';
+      completed = false;
+      running = false;
+      timeLeft = hasTimer() ? ex.workTimer : 0;
+      startTimerUI();
+    };
+  });
+  
+  menu["< Exit"] = function() {
+    cleanup();
+    Bangle.showLauncher();
+  };
+  
+  // Let Espruino handle the menu (removes prior setUI)
+  E.showMenu(menu);
+}
+
+function startTimerUI() {
+  appState = 'timer';
+  // Clear the Espruino menu so we can do custom drawing
+  E.showMenu();
+  g.clear();
+  
+  Bangle.setUI({
+    mode: 'custom',
+    back: function() { showExerciseMenu(); },
+    touch: function(btn, xy) { onTap(); },
+    swipe: function(dir) { onSwipe(dir); }
+  });
+  
+  draw();
+}
+
 // ── loading from storage ─────────────────────────────────────────────
 function loadWorkout() {
   var data = require('Storage').readJSON('wrktmr.json', true);
-  if (data) {
+  if (data && data.exercises && data.exercises.length > 0) {
     workout = data;
-    exIdx = 0;
-    setNum = 1;
-    repNum = 1;
-    phase = 'work';
-    completed = false;
-    running = false;
-    timeLeft = (workout.exercises && workout.exercises.length > 0 && workout.exercises[0].workTimer > 0) ? workout.exercises[0].workTimer : 0;
-    
-    // Tiny buzz to acknowledge load
     Bangle.buzz(100);
-    draw();
+    showExerciseMenu();
   } else {
     startIdleScreen();
   }
@@ -283,9 +330,11 @@ function cleanup() {
 
 // ── idle screen (waiting for sync) ───────────────────────────────────
 function startIdleScreen() {
+  appState = 'idle';
   workout = null;
   completed = false;
   running = false;
+  E.showMenu(); // clear menu if any
   g.clear();
   g.setFontAlign(0, 0);
   g.setFont('Vector', 18);
@@ -293,30 +342,22 @@ function startIdleScreen() {
   g.setFont('Vector', 14);
   g.drawString('Waiting for sync...', g.getWidth() / 2, g.getHeight() / 2 + 16);
   g.flip();
+
+  Bangle.setUI({
+    mode: 'custom',
+    back: function() { cleanup(); Bangle.showLauncher(); }
+  });
 }
 
 // ── boot ─────────────────────────────────────────────────────────────
 var originalGB = global.GB;
 global.GB = handleGB;
 
-// Register as a proper Bangle.js app:
-//   - mode:"custom" means we handle our own drawing
-//   - back: exits to the clock face (long-press button or swipe)
-//   - touch / swipe handlers for workout control
-//   - remove: cleans up intervals & global handlers on exit
-Bangle.setUI({
-  mode: 'custom',
-  back: function() { cleanup(); Bangle.showLauncher(); },
-  touch: function(btn, xy) { onTap(); },
-  swipe: function(dir) { onSwipe(dir); },
-  remove: function() { cleanup(); }
-});
-
 // Keep screen awake while the app is open
 Bangle.setLCDTimeout(0);
 Bangle.setLCDPower(1);
 
-// Tick every second
+// Tick every second checking appState
 timerInterval = setInterval(tick, 1000);
 
 // Load previous workout on launch (or show idle screen if empty)
