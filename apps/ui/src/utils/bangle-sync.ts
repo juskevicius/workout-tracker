@@ -11,6 +11,7 @@ export const syncWorkoutToBangle = async (
         name: exercise.name,
         sets: exercise.sets,
         reps: exercise.reps,
+        repNames: exercise.repNames,
         workTimer: exercise.repDurationSeconds || 0,
         restRepTimer: exercise.repRestPeriodSeconds || 0,
         restSetTimer: exercise.setRestPeriodSeconds || 0,
