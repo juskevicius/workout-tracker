@@ -1,0 +1,7 @@
+{
+  "name": "banglejs",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/banglejs",
+  "projectType": "application",
+  "tags": ["scope:banglejs"]
+}
