@@ -1,7 +1,7 @@
 import {
   LineChart,
   Line,
-  BarChart,
+  ComposedChart,
   Bar,
   XAxis,
   YAxis,
@@ -36,6 +36,7 @@ export function ExerciseProgressChart({
         }),
         avgWeight: Math.round(avgWeight * 10) / 10,
         maxWeight,
+        effort: log.effort || 0,
         fullDate: log.date,
       };
     });
@@ -96,7 +97,8 @@ export function ExerciseProgressChart({
             <LineChart data={weightData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
               <XAxis dataKey="date" tick={{ fontSize: 12 }} stroke="#666" />
-              <YAxis stroke="#666" domain={weightYAxisDomain} />
+              <YAxis yAxisId="left" stroke="#666" domain={weightYAxisDomain} />
+              <YAxis yAxisId="right" orientation="right" stroke="#7c6bb5" domain={[0, 10]} />
               <Tooltip
                 contentStyle={{
                   backgroundColor: '#f5f5f5',
@@ -106,6 +108,7 @@ export function ExerciseProgressChart({
               />
               <Legend />
               <Line
+                yAxisId="left"
                 type="monotone"
                 dataKey="avgWeight"
                 stroke="#55a8a3"
@@ -113,6 +116,16 @@ export function ExerciseProgressChart({
                 dot={{ fill: '#2E5E5A', r: 4 }}
                 activeDot={{ r: 6 }}
                 name="Avg Weight (kg)"
+              />
+              <Line
+                yAxisId="right"
+                type="monotone"
+                dataKey="effort"
+                stroke="#7c6bb5"
+                strokeWidth={2}
+                dot={{ fill: '#5b4a94', r: 3 }}
+                activeDot={{ r: 5 }}
+                name="Effort (1-10)"
               />
             </LineChart>
           </ResponsiveContainer>
@@ -122,10 +135,11 @@ export function ExerciseProgressChart({
       <div className={styles.chartSection}>
         <h4 className={styles.chartTitle}>Reps Progress</h4>
         <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={repsData}>
+          <ComposedChart data={repsData}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
             <XAxis dataKey="date" tick={{ fontSize: 12 }} stroke="#666" />
-            <YAxis stroke="#666" />
+            <YAxis yAxisId="left" stroke="#666" />
+            <YAxis yAxisId="right" orientation="right" stroke="#7c6bb5" domain={[0, 10]} />
             <Tooltip
               contentStyle={{
                 backgroundColor: '#f5f5f5',
@@ -134,8 +148,18 @@ export function ExerciseProgressChart({
               }}
             />
             <Legend />
-            <Bar dataKey="totalReps" fill="#55a8a3" name="Total Reps" />
-          </BarChart>
+            <Bar yAxisId="left" dataKey="totalReps" fill="#55a8a3" name="Total Reps" />
+            <Line
+              yAxisId="right"
+              type="monotone"
+              dataKey="effort"
+              stroke="#7c6bb5"
+              strokeWidth={2}
+              dot={{ fill: '#5b4a94', r: 3 }}
+              activeDot={{ r: 5 }}
+              name="Effort (1-10)"
+            />
+          </ComposedChart>
         </ResponsiveContainer>
       </div>
 
@@ -171,36 +195,6 @@ export function ExerciseProgressChart({
               No notes recorded yet
             </div>
           )}
-        </div>
-      )}
-
-      {repsData.length > 0 && (
-        <div className={styles.chartSection}>
-          <h4 className={styles.chartTitle}>Effort Level</h4>
-          <ResponsiveContainer width="100%" height={300}>
-            <LineChart data={repsData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
-              <XAxis dataKey="date" tick={{ fontSize: 12 }} stroke="#666" />
-              <YAxis domain={[0, 10]} stroke="#666" />
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: '#f5f5f5',
-                  border: '1px solid #ddd',
-                  borderRadius: '4px',
-                }}
-              />
-              <Legend />
-              <Line
-                type="monotone"
-                dataKey="effort"
-                stroke="#55a8a3"
-                strokeWidth={2}
-                dot={{ fill: '#2E5E5A', r: 4 }}
-                activeDot={{ r: 6 }}
-                name="Effort (1-10)"
-              />
-            </LineChart>
-          </ResponsiveContainer>
         </div>
       )}
 
